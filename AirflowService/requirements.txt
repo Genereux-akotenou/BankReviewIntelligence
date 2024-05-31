@@ -1,0 +1,8 @@
+apache-airflow-providers-celery>=3.4.1 ; python_version >= "3.8"
+redis==4.6.0
+apache-airflow-providers-cncf-kubernetes==7.10.0 ; python_version >= "3.8"
+apache-airflow-providers-common-sql==1.8.1 ; python_version >= "3.8"
+apache-airflow-providers-postgres>=2.3.0 ; python_full_version >= "3.8.0"
+apache-airflow-providers-sqlite==3.5.0 ; python_version >= "3.8"
+apache-airflow==2.8.0 ; python_version >= "3.8"
+statsd
