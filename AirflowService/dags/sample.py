@@ -20,7 +20,7 @@ def print_hello():
 
 # Instantiate a DAG with the default_args
 dag = DAG(
-    'hello_airflow',
+    'BankReviewIntelligence Default Drag',
     default_args=default_args,
     description='A simple DAG to test Airflow',
     schedule_interval=timedelta(days=1),
@@ -29,18 +29,18 @@ dag = DAG(
 # Define tasks
 dag_start = DummyOperator(
     task_id='dag_start',
-    dag=dag  # Associate the task with the DAG
+    dag=dag
 )
 
 dag_end = DummyOperator(
     task_id='dag_end',
-    dag=dag  # Associate the task with the DAG
+    dag=dag
 )
 
 hello_task = PythonOperator(
     task_id='hello_task',
     python_callable=print_hello,
-    dag=dag  # Associate the task with the DAG
+    dag=dag
 )
 
 # Set the task dependencies

@@ -1,5 +1,5 @@
-# Use the official ubuntu
-FROM ubuntu:latest
+# Use the official python
+FROM python:3.10.13-slim-bullseye
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -7,10 +7,6 @@ ENV AIRFLOW_HOME=/opt/airflow
 ENV PATH=/opt/airflow/.local/bin:$PATH
 
 # Install system dependencies
-RUN apt-get update
-RUN apt-get install software-properties-common -y
-RUN add-apt-repository ppa:deadsnakes/ppa -y
-
 RUN apt-get update && apt-get install -y \
     build-essential \
     default-libmysqlclient-dev \ 
@@ -22,16 +18,13 @@ RUN apt-get update && apt-get install -y \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python 3.8
-RUN apt update && apt install -y python3.8 python3.8-distutils python3.8-dev
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.8
-RUN ln -s /usr/bin/python3.8 /usr/bin/python
-
 # Include configuration and necessary files into image
 RUN mkdir -p $AIRFLOW_HOME
 COPY requirements.txt /opt/airflow/
 COPY dags /opt/airflow/dags
 COPY airflow.cfg /opt/airflow/airflow.cfg
+
+RUN ln -s /usr/bin/python3.8 /usr/bin/python
 
 # Install Apache Airflow and other python packages from requirements
 RUN pip install -r /opt/airflow/requirements.txt
