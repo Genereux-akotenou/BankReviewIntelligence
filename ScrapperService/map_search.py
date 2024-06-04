@@ -7,6 +7,6 @@ def generate_google_maps_search_link(place):
     return search_url
 
 # Example usage
-place = "Banque Cotonou"
-search_link = generate_google_maps_search_link(place)
-print("Google Maps Search Link:", search_link)
+places = ["Banque Bénin", "Banque Maroc"]
+for place in places:
+    print(generate_google_maps_search_link(place))
