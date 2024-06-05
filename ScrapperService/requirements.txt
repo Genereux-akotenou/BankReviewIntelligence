@@ -1,2 +1,6 @@
 pyautogui
 selenium
+pandas
+selenium
+beautifulsoup4
+tqdm

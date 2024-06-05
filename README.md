@@ -4,6 +4,13 @@ BankReviewIntelligence :  Insightful analytics and decision-making support based
 ## Getting started
 This repository offers a Dockerfile accompanied by a Docker Compose YAML file. These resources are provided for those who wish to host Airflow on their local computer or a standalone machine.
 
+## Project Structure
+
+- `src/`: Contains the source code for the project.
+-`data/`: Contains the scraped data in CSV format.
+- `requirements.txt`: Lists the Python dependencies.
+-`README.md`: Project documentation.
+
 ## Version of Airflow and Python we're using
 * python>=3.8
 * airflow==2.9.0
