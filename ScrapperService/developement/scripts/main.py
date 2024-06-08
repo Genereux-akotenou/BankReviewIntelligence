@@ -15,7 +15,7 @@ def main():
     for country, cities in countries_cities.items():
         for city in cities:
             browser = webdriver.Chrome(options=chrome_options)
-            search_query = f"{country} Bank {city}"
+            search_query = f"Banque {city}, {country} "
             browser.get(f"https://www.google.com/maps/search/{search_query}")
             time.sleep(10) 
             
