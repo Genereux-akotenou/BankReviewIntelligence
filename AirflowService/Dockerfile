@@ -46,6 +46,6 @@ WORKDIR /opt/airflow/
 COPY entrypoint.sh entrypoint.sh
 
 # Expose the necessary ports
-EXPOSE 8080 5555 8793
+EXPOSE 8080 8081 5555 8793
 
 ENTRYPOINT ["./entrypoint.sh"]
