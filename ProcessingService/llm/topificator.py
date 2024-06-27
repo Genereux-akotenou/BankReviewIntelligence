@@ -15,7 +15,9 @@ class TopicExtractor:
             (..., ..., ...)
         ]}
         NB: un 'topic' ou 'sous topic' est un groupe de mot ou un mot.
-        Exemple: Voici un exemple de review <<L'ouverture de compte en ligne a été très rapide et simple mais une fois dansvotre banque je trouve que le personnel est toujours arrogant et trop lent. Je reste sur ma fin pour cette banque>> et voici une bonne sortie:
+        Donne juste la sortie JSON. Pas de commentaire supplementaire.   
+        Exemple1: Voici un exemple de review <<L'ouverture de compte en ligne a été très rapide et simple mais une fois dansvotre 
+        banque je trouve que le personnel est toujours arrogant et trop lent. Je reste sur ma fin pour cette banque>> et voici une bonne sortie:
         {
             "topics": [
               ("ouverture de compte", "Positive", ["rapide", "simple"]),
@@ -23,7 +25,8 @@ class TopicExtractor:
               ("Recommandation", "Neutre", []),
             ]
         }
-        Donne juste la sortie JSON. Pas de commentaire supplementaire."""
+        Exampe2: Review: NAN, Sortie: {'topics': []}
+        """
 
     def _send_request(self, prompt):
         data = {
@@ -34,29 +37,33 @@ class TopicExtractor:
         response = requests.post(self.url, json=data)
         if response.status_code == 200:
             response_data = response.json()
-            print(response_data['response'])
+            #print(response_data['response'])
             return response_data.get('response', 'No response field found')
         else:
             raise Exception(f"Failed to retrieve data, status code {response.status_code}")
     
     def extract(self, reviews, type='SINGLE_SOURCE'):
-        tries = 0
-        while tries < self.max_try:
-            try:
-                if type == 'SINGLE_SOURCE':
-                    if isinstance(reviews, str):
-                        prompt = f"Extraire les topics de cette revue '{reviews}'. et donne la sortie au **format JSON** suiavnt: " + self.format1
-                        response = self._send_request(prompt)
-                        return self._parse_single_response(response)
+        print("REVIEW: ", reviews)
+        if reviews == "NAN":
+            return {'topics': []}
+        else:
+            tries = 0
+            while tries < self.max_try:
+                try:
+                    if type == 'SINGLE_SOURCE':
+                        if isinstance(reviews, str):
+                            prompt = f"Extraire les topics de cette revue '{reviews}'. et donne la sortie au **format JSON** suiavnt: " + self.format1
+                            response = self._send_request(prompt)
+                            return self._parse_single_response(response)
+                        else:
+                            raise AssertionError("For SINGLE_SOURCE, reviews should be a single string.")
                     else:
-                        raise AssertionError("For SINGLE_SOURCE, reviews should be a single string.")
-                else:
-                    raise AssertionError("type arg should either be 'SINGLE_SOURCE' or 'MULTI_SOURCE'")
-            except Exception as e:
-                print(f"Attempt {tries + 1} failed with error: {e}")
-                tries += 1
-                time.sleep(2)
-        return f"Failed to extract topics after {self.max_try} attempts"
+                        raise AssertionError("type arg should either be 'SINGLE_SOURCE' or 'MULTI_SOURCE'")
+                except Exception as e:
+                    print(f"Attempt {tries + 1} failed with error: {e}")
+                    tries += 1
+                    time.sleep(2)
+            return f"Failed to extract topics after {self.max_try} attempts"
         
     @staticmethod
     def _safejson(response):

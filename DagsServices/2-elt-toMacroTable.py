@@ -124,12 +124,12 @@ default_args = {
     'email_on_retry': False,
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
-}
+}    
 dag = DAG(
     'FEED-WORKING-TABLE',
     default_args=default_args,
     description='A DAG to process new parquet files and then save historic version in a working table that will also be a .parquet file',
-    schedule_interval=timedelta(seconds=5),
+    schedule_interval=None,
     start_date=days_ago(1),
     catchup=False,
     max_active_runs=1,
