@@ -53,6 +53,7 @@ def preprocess_dataframe(df):
         df[column] = df[column].apply(transformation)
     df['Topic'] = {}
     
+    
     # Function to extract topics using LDA
     def extract_topics(text_series, n_topics=2):
         vectorizer = CountVectorizer(stop_words='french')
