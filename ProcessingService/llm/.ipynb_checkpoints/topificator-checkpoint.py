@@ -7,6 +7,15 @@ class TopicExtractor:
         self.url = url
         self.model = model
         self.max_try = patience
+        self.topics = [
+            "service_client",
+            "produits_financiers",
+            "expérience_utilisateur",
+            "gestion_des_comptes",
+            "sécurité",
+            "localisation_accessibilité",
+            "services_additionnels"
+        ]
         self.format1 = """
         {topics: [
             ('topic1', 'Positive', ['sous topic', 'sous topic', ...]),
@@ -25,8 +34,8 @@ class TopicExtractor:
               ("Recommandation", "Neutre", []),
             ]
         }
-        Exampe2: Review: NAN, Sortie: {'topics': []}
-        """
+        Exampe2: Review: NAN, Sortie: {'topics': []}"""
+        #Utilise seulement ces topics . Pas d'autres. """ + str(self.topics)
 
     def _send_request(self, prompt):
         data = {
