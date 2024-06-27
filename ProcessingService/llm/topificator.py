@@ -21,12 +21,10 @@ class TopicExtractor:
             ('topic1', 'Positive', ['sous topic', 'sous topic', ...]),
             ('topic2', 'Negative', ['sous topic', 'sous topic', ...]),
             ('topic3', 'Neutral', ['sous topic', 'sous topic', ...]),
-            (..., ..., ...)
         ]}
         NB: un 'topic' ou 'sous topic' est un groupe de mot ou un mot.
         Donne juste la sortie JSON. Pas de commentaire supplementaire.   
-        Exemple1: Voici un exemple de review <<L'ouverture de compte en ligne a été très rapide et simple mais une fois dansvotre 
-        banque je trouve que le personnel est toujours arrogant et trop lent. Je reste sur ma fin pour cette banque>> et voici une bonne sortie:
+        Voici une exemple de sortie:
         {
             "topics": [
               ("ouverture de compte", "Positive", ["rapide", "simple"]),
@@ -34,7 +32,7 @@ class TopicExtractor:
               ("Recommandation", "Neutre", []),
             ]
         }
-        Exampe2: Review: NAN, Sortie: {'topics': []}"""
+       Si le review est NAN, Sortie: {'topics': []}. Pour le review donne la sortie conrespondant a son analyse """
         #Utilise seulement ces topics . Pas d'autres. """ + str(self.topics)
 
     def _send_request(self, prompt):
@@ -52,7 +50,7 @@ class TopicExtractor:
             raise Exception(f"Failed to retrieve data, status code {response.status_code}")
     
     def extract(self, reviews, type='SINGLE_SOURCE'):
-        print("REVIEW: ", reviews)
+        #print("REVIEW: ", reviews)
         if reviews == "NAN":
             return {'topics': []}
         else:
