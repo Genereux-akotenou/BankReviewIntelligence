@@ -60,6 +60,7 @@ CREATE TABLE Dimension_Sentiment (
 -- Table Fact Reviews
 CREATE TABLE Fact_Reviews (
     Review_ID SERIAL PRIMARY KEY,
+    Region_ID INT,
     Bank_ID INT,
     Reviewer_ID INT,
     Time_ID INT,
@@ -68,6 +69,7 @@ CREATE TABLE Fact_Reviews (
     SubTopic_ID INT,
     Count_Review INT,
     FOREIGN KEY (Bank_ID) REFERENCES Dimension_Bank(Bank_ID),
+    FOREIGN KEY (Region_ID) REFERENCES Dimension_Region(Region_ID),
     FOREIGN KEY (Reviewer_ID) REFERENCES Dimension_Reviewer(Reviewer_ID),
     FOREIGN KEY (Time_ID) REFERENCES Dimension_Time(Time_ID),
     FOREIGN KEY (Topic_ID) REFERENCES Dimension_Topic(Topic_ID),
