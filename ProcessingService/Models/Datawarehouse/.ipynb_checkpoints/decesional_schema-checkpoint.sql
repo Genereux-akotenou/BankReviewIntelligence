@@ -2,61 +2,64 @@
 
 -- Table Dimension Region
 CREATE TABLE Dimension_Region (
-    Region_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Region_ID SERIAL PRIMARY KEY,
     Country VARCHAR(255) NOT NULL,
-    Town VARCHAR(255) NOT NULL
-    UNIQUE (Country, Town)
+    Town VARCHAR(255) NOT NULL,
+    CONSTRAINT region_unique UNIQUE (Country, Town)
 );
 
 -- Table Dimension Bank
 CREATE TABLE Dimension_Bank (
-    Bank_ID INT PRIMARY KEY AUTO_INCREMENT,
-    Bank_Name VARCHAR(255) NOT NULL,
-    Bank_Phone_number VARCHAR(50),
-    Bank_Address VARCHAR(255),
-    Bank_Website VARCHAR(255)
+    Bank_ID SERIAL PRIMARY KEY,
+    Bank_Name VARCHAR(255),
+    Bank_Phone_number VARCHAR(255),
+    Bank_Address TEXT,
+    Bank_Website VARCHAR(255),
+    CONSTRAINT bank_unique UNIQUE (Bank_Name, Bank_Phone_number, Bank_Address, Bank_Website)
 );
 
 -- Table Dimension Reviewer
 CREATE TABLE Dimension_Reviewer (
-    Reviewer_ID INT PRIMARY KEY AUTO_INCREMENT,
-    Reviewer_Name VARCHAR(255) NOT NULL,
-    Reviewer_Profil_Link VARCHAR(255)
+    Reviewer_ID SERIAL PRIMARY KEY,
+    Reviewer_Name VARCHAR(255),
+    Reviewer_Profil_Link TEXT,
+    CONSTRAINT reviewer_unique UNIQUE (Reviewer_Name, Reviewer_Profil_Link)
 );
 
 -- Table Dimension Time
 CREATE TABLE Dimension_Time (
-    Time_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Time_ID SERIAL PRIMARY KEY,
     Week INT,
     Month INT,
-    Year INT
+    Year INT,
+    CONSTRAINT time_unique UNIQUE (Week, Month, Year)
 );
 
 -- Table Dimension Topic
 CREATE TABLE Dimension_Topic (
-    Topic_ID INT PRIMARY KEY AUTO_INCREMENT,
-    Label VARCHAR(255) NOT NULL
+    Topic_ID SERIAL PRIMARY KEY,
+    Label VARCHAR(255),
+    CONSTRAINT topic_unique UNIQUE (Label)
 );
 
 -- Table Dimension SubTopic
 CREATE TABLE Dimension_SubTopic (
-    SubTopic_ID INT PRIMARY KEY AUTO_INCREMENT,
-    Label VARCHAR(255) NOT NULL
+    SubTopic_ID SERIAL PRIMARY KEY,
+    Label VARCHAR(255),
+    CONSTRAINT subtopic_unique UNIQUE (Label)
 );
 
 -- Table Dimension Sentiment
 CREATE TABLE Dimension_Sentiment (
-    Sentiment_ID INT PRIMARY KEY AUTO_INCREMENT,
-    Positive_Sentiment VARCHAR(255),
-    Negative_Sentiment VARCHAR(255),
-    Neutral_Sentiment VARCHAR(255)
+    Sentiment_ID SERIAL PRIMARY KEY,
+    Type VARCHAR(255),
+    CONSTRAINT sentiment_unique UNIQUE (Type)
 );
-
 -- Création de la table de faits
 
 -- Table Fact Reviews
 CREATE TABLE Fact_Reviews (
-    Review_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Review_ID SERIAL PRIMARY KEY,
     Bank_ID INT,
     Reviewer_ID INT,
     Time_ID INT,
