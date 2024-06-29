@@ -3,7 +3,7 @@ BankReviewIntelligence :  Insightful analytics and decision-making support based
 
 ## Demo
 <video width="320" height="240" controls autoplay>
-  <source src="demo.mp4" type="video/mov">
+  <source src="demo.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
