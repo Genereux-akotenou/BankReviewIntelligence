@@ -1,13 +1,14 @@
 # BRI
 BankReviewIntelligence :  Insightful analytics and decision-making support based on customer reviews of banks.
 
-<img src="./architecture.jpg" alt="project architecture draft" style="width: 100%"/>
-
 ## Demo
 <video width="320" height="240" controls autoplay>
-  <source src="branding2.mov" type="video/mov">
+  <source src="demo.mp4" type="video/mov">
   Your browser does not support the video tag.
 </video>
+
+## Architecture
+<img src="./architecture.jpg" alt="project architecture draft" style="width: 100%"/>
 
 ## Getting started
 This repository offers a Dockerfile accompanied by a Docker Compose YAML file. These resources are provided for those who wish to host Airflow on their local computer or a standalone machine.
